@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser'
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/iife.js',
+    file: 'dist/scripts/main.js',
     format: 'iife',
   },
   plugins: [
@@ -16,6 +16,6 @@ export default {
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
-    terser(),
+    // terser(),
   ],
 }
