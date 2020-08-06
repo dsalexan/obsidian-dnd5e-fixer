@@ -2,6 +2,7 @@
 
 import actorResource from './actor/resource'
 import actorArmorClass from './actor/ac'
+import actorSkill from './actor/skill'
 
 Hooks.once('init', function () {
   console.log('INIT OBSIDIAN-FIXER', CONFIG.statusEffects)
@@ -20,9 +21,12 @@ Hooks.on('updateActor', (actor, updated) => {
 
   actorResource.onUpdateActor(actor, updated)
   actorArmorClass.onUpdateActor(actor, updated)
+  actorSkill.onUpdateActor(actor, updated)
 })
 
 // This hook is required for Tokens linked to an Actor
 Hooks.on('updateOwnedItem', (actor, item) => {
+  // console.log('HOOKS >', 'updateOwnedItem', { actor, item })
+
   actorResource.onUpdateOwnedItem(actor, item)
 })

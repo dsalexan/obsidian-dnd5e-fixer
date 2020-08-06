@@ -1406,6 +1406,61 @@
 
   var actorArmorClass = { onUpdateActor: onUpdateActor$1 };
 
+  function onUpdateObsidianSkill(actor, updated) {
+    // if not a ac update, bail out
+    if (!get_1(updated, 'flags.obsidian.skills')) return;
+
+    var skills = Object.entries(get_1(updated, 'flags.obsidian.skills'));
+
+    // console.log('HOOKS >', 'updateActor >', 'updateObsidianSkill', { actor, updated, skills })
+
+    skills.map(function (_ref) {var _actor$update;var _ref2 = slicedToArray(_ref, 2),skill = _ref2[0],data = _ref2[1];
+      var defaultSkill = get_1(actor, "data.data.skills.".concat(skill), {});
+
+      var value = get_1(data, 'value', get_1(defaultSkill, 'value', 0));
+      var ability = get_1(data, 'ability', get_1(defaultSkill, 'ability'));
+      var bonus = get_1(data, 'bonus', get_1(defaultSkill, 'bonus', 0));
+
+      actor.update((_actor$update = {}, defineProperty(_actor$update, "data.skills.".concat(
+      skill, ".value"), value), defineProperty(_actor$update, "data.skills.".concat(
+      skill, ".ability"), ability), defineProperty(_actor$update, "data.skills.".concat(
+      skill, ".bonus"), bonus), _actor$update));
+
+    });
+  }
+
+  function onUpdateDefaultSkill(actor, updated) {
+    // if not a ac update, bail out
+    if (!get_1(updated, 'data.skills')) return;
+
+    var skills = Object.entries(get_1(updated, 'data.skills'));
+
+    // console.log('HOOKS >', 'updateActor >', 'updateSkill', { actor, updated, skills })
+
+    skills.map(function (_ref3) {var _actor$update2;var _ref4 = slicedToArray(_ref3, 2),skill = _ref4[0],data = _ref4[1];
+      var obsidianSkill = get_1(actor, "data.flags.obsidian.skills.".concat(skill), {});
+
+      var value = get_1(data, 'value', get_1(obsidianSkill, 'value', 0));
+      var ability = get_1(data, 'ability', get_1(obsidianSkill, 'ability'));
+      var bonus = get_1(data, 'bonus', get_1(obsidianSkill, 'bonus', 0));
+
+      if (value === obsidianSkill.value && ability === obsidianSkill.ability && bonus === obsidianSkill.bonus) return;
+
+      actor.update((_actor$update2 = {}, defineProperty(_actor$update2, "flags.obsidian.skills.".concat(
+      skill, ".value"), value), defineProperty(_actor$update2, "flags.obsidian.skills.".concat(
+      skill, ".ability"), ability), defineProperty(_actor$update2, "flags.obsidian.skills.".concat(
+      skill, ".bonus"), bonus), _actor$update2));
+
+    });
+  }
+
+  function onUpdateActor$2(actor, updated) {
+    onUpdateDefaultSkill(actor, updated);
+    onUpdateObsidianSkill(actor, updated);
+  }
+
+  var actorSkill = { onUpdateActor: onUpdateActor$2 };
+
   /* global Hooks, CONFIG, OBSIDIAN, ui */
 
   Hooks.once('init', function () {
@@ -1425,10 +1480,13 @@
 
     actorResource.onUpdateActor(actor, updated);
     actorArmorClass.onUpdateActor(actor, updated);
+    actorSkill.onUpdateActor(actor, updated);
   });
 
   // This hook is required for Tokens linked to an Actor
   Hooks.on('updateOwnedItem', function (actor, item) {
+    // console.log('HOOKS >', 'updateOwnedItem', { actor, item })
+
     actorResource.onUpdateOwnedItem(actor, item);
   });
 
