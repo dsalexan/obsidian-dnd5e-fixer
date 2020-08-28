@@ -3,10 +3,19 @@
 import actorResource from './actor/resource'
 import actorArmorClass from './actor/ac'
 import actorSkill from './actor/skill'
+import actorEffect from './actor/effect'
+
+import sharedData from './hotbar/shared'
+import tokenOverlay from './token/overlay'
 
 Hooks.once('init', function () {
-  console.log('INIT OBSIDIAN-FIXER', CONFIG.statusEffects)
+  console.log('MAY |', 'Initializing May module')
 })
+
+sharedData.registerHooks()
+
+tokenOverlay.registerPrototypes()
+tokenOverlay.registerHooks()
 
 // // This hook is required for Tokens NOT linked to an Actor
 // Hooks.on("updateToken", (scene, sceneID, update, tokenData, userId) => {
@@ -30,3 +39,19 @@ Hooks.on('updateOwnedItem', (actor, item) => {
 
   actorResource.onUpdateOwnedItem(actor, item)
 })
+
+Hooks.on('createOwnedItem', (actor, item) => {
+  // console.log('HOOKS >', 'createOwnedItem', { actor, item })
+
+  actorEffect.onCreateOwnedItem(actor, item)
+})
+
+Hooks.on('deleteOwnedItem', (actor, item) => {
+  // console.log('HOOKS >', 'deleteOwnedItem', { actor, item })
+
+  actorEffect.onDeleteOwnedItem(actor, item)
+})
+
+// HOOK > ready -> Load hotbar with user's default
+// HOOK > token select -> Load hotbar with actors/tokens variant
+// HOOK > drop on hotbar -> Save hotbar to actors/tokens variant/user's default

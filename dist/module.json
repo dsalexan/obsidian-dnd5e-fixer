@@ -1,12 +1,13 @@
 {
-  "name": "obsidian-dnd5e-fixer",
-  "title": "A Adapter of Obsidian for D&D 5E system.",
-  "description": "A simple module created to adapt some behaviors of the Obsidian sheet and translate them to the D&D 5E default.",
+  "name": "may",
+  "title": "May",
+  "description": "A simple module created to adapt some behaviors of the Obsidian sheet and translate them to the D&D 5E default, also a shared hotbar implementation.",
   "author": "dsalexan",
   "version": "1.0.0",
   "minimumCoreVersion": "0.6.5",
 	"systems": ["dnd5e"],
   "esmodules": [
     "scripts/main.js"
-  ]
+  ],  
+  "scripts": ["scripts/patchlib.js"]
 }

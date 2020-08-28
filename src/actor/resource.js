@@ -1,6 +1,6 @@
 /* global OBSIDIAN, ui */
 
-import get from 'lodash/get'
+import get from 'lodash-es/get'
 
 export function onUpdateActor(actor, updated) {
   // if not a resources update, bail out

@@ -5,17 +5,24 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d dist --copy-files",
-    "bundle": "rollup -c"
+    "bundle": "rollup -c",
+    "bundle:debug": "rollup -c ./src/modules/debug/rollup.config.js",
+    "module": "babel-node src/modules/debug/.build-module.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.19"
+    "chroma-js": "^2.1.0",
+    "gulp-flatten": "^0.4.0",
+    "lodash": "^4.17.19",
+    "lodash-es": "^4.17.15",
+    "merge-stream": "^2.0.0",
+    "yargs": "^15.4.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
-    "@babel/node": "^7.10.1",
+    "@babel/node": "^7.10.5",
     "@babel/plugin-syntax-async-generators": "^7.8.4",
     "@babel/plugin-transform-async-to-generator": "^7.10.1",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -25,7 +32,7 @@
     "@babel/runtime": "^7.10.2",
     "babel-eslint": "8.2.3",
     "babel-plugin-module-resolver": "^4.0.0",
-    "debug": "3.1.0",
+    "debug": "^4.1.1",
     "eslint": "4.19.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-babel-module": "^5.1.2",

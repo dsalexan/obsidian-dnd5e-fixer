@@ -25,7 +25,7 @@
     "camelcase": [1, {"properties": "always"}],
     "brace-style": 2,
     "max-depth": [2, 2],
-    "max-params": [2, 3],
+    "max-params": [2, 5],
     "consistent-return": 0,
     "space-before-blocks": 2,
     "no-debugger": 0,

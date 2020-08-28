@@ -16,7 +16,12 @@
         "singleInstance": true
       },
       {
-        "name": "Patch Obsidian",
+        "name": "Pre-Patch",
+        "command": "gulp pre:patch",
+        "singleInstance": true
+      },
+      {
+        "name": "Patch",
         "command": "gulp patch",
         "singleInstance": true
       }

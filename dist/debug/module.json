@@ -1,0 +1,12 @@
+{
+  "name": "debug",
+  "title": "Debug",
+  "description": "A port for the Debug package into Foundry.",
+  "author": "dsalexan",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.6.6",
+  "systems": [],
+  "esmodules": [
+    "scripts/main.js"
+  ]
+}
